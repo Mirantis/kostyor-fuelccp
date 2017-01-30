@@ -1,0 +1,7 @@
+[run]
+branch = true
+
+[report]
+exclude_lines =
+    @abc.abstractmethod
+    @abc.abstractproperty
