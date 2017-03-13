@@ -165,7 +165,7 @@ def _get_hosts(parameters):
         if ccpapp in _SERVICES_BY_CCPAPP:
             rv[pod.obj['spec']['nodeName']].extend(
                 {
-                    'name': ccpapp,
+                    'name': service,
                 }
                 for service in _SERVICES_BY_CCPAPP[ccpapp]
             )
