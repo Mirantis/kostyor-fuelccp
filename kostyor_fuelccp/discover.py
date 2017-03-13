@@ -19,97 +19,7 @@ import pykube
 from kostyor.inventory.discover import ServiceDiscovery
 from kostyor.rpc.app import app
 
-
-# PODs provided by Fuel CCP have an application label that uniquely
-# defines which services the POD is running. This is a map of application
-# label to OpenStack services.
-_SERVICES_BY_CCPAPP = {
-    'keystone': [
-        'keystone-wsgi-admin',
-        'keystone-wsgi-public',
-    ],
-    'glance-registry': [
-        'glance-registry',
-    ],
-    'glance-api': [
-        'glance-api',
-    ],
-    'nova-conductor': [
-        'nova-conductor',
-    ],
-    'nova-scheduler': [
-        'nova-scheduler',
-    ],
-    'nova-novncproxy': [
-        'nova-novncproxy',
-    ],
-    'nova-consoleauth': [
-        'nova-consoleauth',
-    ],
-    'nova-api': [
-        'nova-api',
-    ],
-    'nova-compute': [
-        'nova-compute',
-    ],
-    'neutron-server': [
-        'neutron-server',
-    ],
-    'neutron-openvswitch-agent': [
-        'neutron-openvswitch-agent',
-    ],
-    'neutron-l3-agent': [
-        'neutron-l3-agent',
-    ],
-    'neutron-dhcp-agent': [
-        'neutron-dhcp-agent',
-    ],
-    'neutron-metadata-agent': [
-        'neutron-metadata-agent',
-    ],
-    'cinder-api': [
-        'cinder-api',
-    ],
-    'cinder-scheduler': [
-        'cinder-scheduler',
-    ],
-    'cinder-volume': [
-        'cinder-volume',
-    ],
-    'cinder-backup': [
-        'cinder-backup',
-    ],
-    'horizon': [
-        'horizon-wsgi',
-    ],
-    'heat-api': [
-        'heat-api',
-    ],
-    'heat-api-cfn': [
-        'heat-api-cfn',
-    ],
-    'heat-engine': [
-        'heat-engine',
-    ],
-    'ironic-conductor': [
-        'ironic-conductor',
-    ],
-    'ironic-api': [
-        'ironic-api',
-    ],
-    'murano-api': [
-        'murano-api',
-    ],
-    'murano-engine': [
-        'murano-engine',
-    ],
-    'sahara-engine': [
-        'sahara-engine',
-    ],
-    'sahara-api': [
-        'sahara-api',
-    ],
-}
+from ._misc import get_services_by_app
 
 
 @app.task
@@ -161,13 +71,14 @@ def _get_hosts(parameters):
 
     for pod in pods:
         ccpapp = pod.labels.get('app')
+        services = get_services_by_app(ccpapp)
 
-        if ccpapp in _SERVICES_BY_CCPAPP:
+        if services:
             rv[pod.obj['spec']['nodeName']].extend(
                 {
                     'name': service,
                 }
-                for service in _SERVICES_BY_CCPAPP[ccpapp]
+                for service in services
             )
 
     return rv
