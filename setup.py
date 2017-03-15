@@ -28,10 +28,14 @@ setup(
     ],
     install_requires=[
         'pykube >= 0.14',
+        'PyYAML >= 3.12',
     ],
     entry_points={
         'kostyor.discovery_drivers': [
             'fuel-ccp = kostyor_fuelccp.discover:Driver',
+        ],
+        'kostyor.upgrades.drivers': [
+            'fuel-ccp = kostyor_fuelccp.upgrades:Driver',
         ],
     },
     classifiers=[

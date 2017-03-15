@@ -12,10 +12,36 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import json
+import io
 import os
+import json
+import uuid
+
+import yaml
 
 
 def get_fixture(name):
     with open(os.path.join(os.path.dirname(__file__), name)) as fp:
         return json.load(fp)
+
+
+def set_conf(confpath, conf):
+    with io.open(confpath, 'wt', encoding='utf-8') as f:
+        yaml.dump(conf, f, default_flow_style=False, encoding=None)
+
+
+def get_conf(confpath):
+    with io.open(confpath, encoding='utf-8') as f:
+        return yaml.load(f)
+
+
+def get_hosts(*hostnames):
+    cluster_id = str(uuid.uuid4())
+    return [
+        {
+            'id': str(uuid.uuid4()),
+            'cluster_id': cluster_id,
+            'hostname': hostname
+        }
+        for hostname in hostnames
+    ]

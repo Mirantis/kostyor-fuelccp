@@ -35,7 +35,7 @@ _SERVICES_BY_APP = {
         'nova-compute',
     ],
     'nova-compute-ironic': [
-        'nova-compute',
+        'nova-compute-ironic',
     ],
     'nova-conductor': [
         'nova-conductor',
@@ -117,20 +117,19 @@ _SERVICES_BY_APP = {
     ],
 }
 
-# If for discovering we need to figure out which services are running by
-# PODs, for upgrade procedure we need to do vice versa. THe reason behind
-# is that we want to ensure that each application is upgraded only once,
-# and mapping a service onto application helps to implement this tracking.
-_APP_BY_SERVICE = {
-    service: app
-    for app, services in _SERVICES_BY_APP.items()
-    for service in services
-}
-
 
 def get_services_by_app(appname):
     return _SERVICES_BY_APP.get(appname)
 
 
-def get_app_by_service(service_name):
-    return _APP_BY_SERVICE.get(service_name)
+def get_apps_by_component(component_name):
+    return sorted([
+        appname
+        for appname in _SERVICES_BY_APP if appname.startswith(component_name)
+    ])
+
+
+def get_component_from_service(service_name):
+    # OpenStack services has the following naming format: '{component}-*',
+    # so we can use first part before dash as a component name.
+    return service_name.split('-')[0]

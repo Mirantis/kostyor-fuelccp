@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+
 import mock
 import pytest
 
@@ -23,7 +25,7 @@ from .common import get_fixture
 
 class TestDriver(object):
 
-    _pods = get_fixture('ccppods.json')
+    _pods = get_fixture(os.path.join('pods', 'all.json'))
 
     @pytest.fixture(autouse=True)
     def use_sync_tasks(self, monkeypatch):
