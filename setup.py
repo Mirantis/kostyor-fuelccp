@@ -10,7 +10,7 @@ with open(os.path.join(here, 'README.rst'), 'r', encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='kostyor-fuel-ccp',
+    name='kostyor-fuelccp',
     description='Fuel CCP driver for Kostyor',
     long_description=long_description,
     license='Apache 2.0',
@@ -28,10 +28,14 @@ setup(
     ],
     install_requires=[
         'pykube >= 0.14',
+        'PyYAML >= 3.12',
     ],
     entry_points={
         'kostyor.discovery_drivers': [
-            'fuel-ccp = kostyor_fuel_ccp.discover:Driver',
+            'fuel-ccp = kostyor_fuelccp.discover:Driver',
+        ],
+        'kostyor.upgrades.drivers': [
+            'fuel-ccp = kostyor_fuelccp.upgrades:Driver',
         ],
     },
     classifiers=[

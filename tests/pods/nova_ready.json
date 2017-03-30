@@ -1,0 +1,3253 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicaSet\",\"namespace\":\"ccp\",\"name\":\"nova-api-3819121292\",\"uid\":\"8402a616-0fe3-11e7-a5df-fa163e96cbdb\",\"apiVersion\":\"extensions\",\"resourceVersion\":\"412506\"}}\n",
+                    "scheduler.alpha.kubernetes.io/affinity": "{\"nodeAffinity\": {\"requiredDuringSchedulingIgnoredDuringExecution\": {\"nodeSelectorTerms\": [{\"matchExpressions\": [{\"key\": \"kubernetes.io/hostname\", \"operator\": \"In\", \"values\": [\"ikalnitsky-k8s-2\", \"ikalnitsky-k8s-3\", \"ikalnitsky-k8s-4\"]}]}]}}}"
+                },
+                "creationTimestamp": "2017-03-23T16:12:30Z",
+                "generateName": "nova-api-3819121292-",
+                "labels": {
+                    "app": "nova-api",
+                    "ccp": "true",
+                    "ccp-component": "nova",
+                    "pod-template-hash": "3819121292"
+                },
+                "name": "nova-api-3819121292-j1f0c",
+                "namespace": "ccp",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "extensions/v1beta1",
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "nova-api-3819121292",
+                        "uid": "8402a616-0fe3-11e7-a5df-fa163e96cbdb"
+                    }
+                ],
+                "resourceVersion": "412565",
+                "selfLink": "/api/v1/namespaces/ccp/pods/nova-api-3819121292-j1f0c",
+                "uid": "84071a56-0fe3-11e7-a5df-fa163e96cbdb"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "command": [
+                            "dumb-init",
+                            "/usr/bin/python",
+                            "/opt/ccp_start_script/bin/start_script.py",
+                            "provision",
+                            "nova-api"
+                        ],
+                        "env": [
+                            {
+                                "name": "CCP_NODE_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "spec.nodeName"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CCP_POD_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "metadata.name"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CPU_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.cpu"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "MEMORY_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.memory"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CM_VERSION",
+                                "value": "4051234051244064924064954065041603225fdb09ccb20f6b1bb8e47c820c54629ed4"
+                            }
+                        ],
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-api:latest",
+                        "imagePullPolicy": "Always",
+                        "name": "nova-api",
+                        "readinessProbe": {
+                            "exec": {
+                                "command": [
+                                    "/usr/bin/python",
+                                    "/opt/ccp_start_script/bin/start_script.py",
+                                    "status",
+                                    "nova-api"
+                                ]
+                            },
+                            "failureThreshold": 3,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "privileged": true
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/etc/ccp/globals",
+                                "name": "globals"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/global-secrets",
+                                "name": "global-secrets"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/role",
+                                "name": "role"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/meta",
+                                "name": "meta"
+                            },
+                            {
+                                "mountPath": "/opt/ccp_start_script/bin",
+                                "name": "start-script"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/exports",
+                                "name": "exports"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/files",
+                                "name": "files"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/nodes-config",
+                                "name": "nodes-config"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/service-config",
+                                "name": "service-config"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-cghh4",
+                                "readOnly": true
+                            }
+                        ]
+                    },
+                    {
+                        "command": [
+                            "dumb-init",
+                            "/usr/bin/python",
+                            "/opt/ccp_start_script/bin/start_script.py",
+                            "provision",
+                            "nginx-nova-api"
+                        ],
+                        "env": [
+                            {
+                                "name": "CCP_NODE_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "spec.nodeName"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CCP_POD_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "metadata.name"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CPU_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.cpu"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "MEMORY_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.memory"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CM_VERSION",
+                                "value": "4051234051244064924064954065041603225fdb09ccb20f6b1bb8e47c820c54629ed4"
+                            }
+                        ],
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/9.0/mitaka/nginx:latest",
+                        "imagePullPolicy": "Always",
+                        "name": "nginx-nova-api",
+                        "readinessProbe": {
+                            "exec": {
+                                "command": [
+                                    "/usr/bin/python",
+                                    "/opt/ccp_start_script/bin/start_script.py",
+                                    "status",
+                                    "nginx-nova-api"
+                                ]
+                            },
+                            "failureThreshold": 3,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "privileged": false
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/etc/ccp/globals",
+                                "name": "globals"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/global-secrets",
+                                "name": "global-secrets"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/role",
+                                "name": "role"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/meta",
+                                "name": "meta"
+                            },
+                            {
+                                "mountPath": "/opt/ccp_start_script/bin",
+                                "name": "start-script"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/exports",
+                                "name": "exports"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/files",
+                                "name": "files"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/nodes-config",
+                                "name": "nodes-config"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/service-config",
+                                "name": "service-config"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-cghh4",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "imagePullSecrets": [
+                    {
+                        "name": "registry-key"
+                    }
+                ],
+                "nodeName": "ikalnitsky-k8s-3",
+                "restartPolicy": "Always",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "globals",
+                                    "path": "globals.json"
+                                }
+                            ],
+                            "name": "globals"
+                        },
+                        "name": "globals"
+                    },
+                    {
+                        "name": "global-secrets",
+                        "secret": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "global-secrets",
+                                    "path": "global-secrets.json"
+                                }
+                            ],
+                            "secretName": "global-secrets"
+                        }
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "start-script",
+                                    "path": "start_script.py"
+                                }
+                            ],
+                            "name": "start-script"
+                        },
+                        "name": "start-script"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "nova-api",
+                                    "path": "nova-api.json"
+                                },
+                                {
+                                    "key": "nova-db-create",
+                                    "path": "nova-db-create.json"
+                                },
+                                {
+                                    "key": "nova-db-sync",
+                                    "path": "nova-db-sync.json"
+                                },
+                                {
+                                    "key": "nova-api-db-sync",
+                                    "path": "nova-api-db-sync.json"
+                                },
+                                {
+                                    "key": "nova-db-migrations",
+                                    "path": "nova-db-migrations.json"
+                                },
+                                {
+                                    "key": "nova-user-create",
+                                    "path": "nova-user-create.json"
+                                },
+                                {
+                                    "key": "nova-role-add",
+                                    "path": "nova-role-add.json"
+                                },
+                                {
+                                    "key": "nova-service-legacy-create",
+                                    "path": "nova-service-legacy-create.json"
+                                },
+                                {
+                                    "key": "nova-public-legacy-endpoint-create",
+                                    "path": "nova-public-legacy-endpoint-create.json"
+                                },
+                                {
+                                    "key": "nova-internal-legacy-endpoint-create",
+                                    "path": "nova-internal-legacy-endpoint-create.json"
+                                },
+                                {
+                                    "key": "nova-admin-legacy-endpoint-create",
+                                    "path": "nova-admin-legacy-endpoint-create.json"
+                                },
+                                {
+                                    "key": "nova-service-create",
+                                    "path": "nova-service-create.json"
+                                },
+                                {
+                                    "key": "nova-public-endpoint-create",
+                                    "path": "nova-public-endpoint-create.json"
+                                },
+                                {
+                                    "key": "nova-internal-endpoint-create",
+                                    "path": "nova-internal-endpoint-create.json"
+                                },
+                                {
+                                    "key": "nova-admin-endpoint-create",
+                                    "path": "nova-admin-endpoint-create.json"
+                                },
+                                {
+                                    "key": "nova-bootstrap-flavor-0",
+                                    "path": "nova-bootstrap-flavor-0.json"
+                                },
+                                {
+                                    "key": "nova-bootstrap-flavor-1",
+                                    "path": "nova-bootstrap-flavor-1.json"
+                                },
+                                {
+                                    "key": "nova-bootstrap-flavor-2",
+                                    "path": "nova-bootstrap-flavor-2.json"
+                                },
+                                {
+                                    "key": "nova-bootstrap-flavor-3",
+                                    "path": "nova-bootstrap-flavor-3.json"
+                                },
+                                {
+                                    "key": "nova-bootstrap-flavor-4",
+                                    "path": "nova-bootstrap-flavor-4.json"
+                                },
+                                {
+                                    "key": "nova-bootstrap-flavor-5",
+                                    "path": "nova-bootstrap-flavor-5.json"
+                                },
+                                {
+                                    "key": "nginx-nova-api",
+                                    "path": "nginx-nova-api.json"
+                                }
+                            ],
+                            "name": "nova-api-role"
+                        },
+                        "name": "role"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "meta",
+                                    "path": "meta.json"
+                                }
+                            ],
+                            "name": "nova-api-meta"
+                        },
+                        "name": "meta"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "ca-cert",
+                                    "path": "ca-cert"
+                                },
+                                {
+                                    "key": "create-flavor.sh",
+                                    "path": "create-flavor.sh"
+                                },
+                                {
+                                    "key": "nova.conf",
+                                    "path": "nova.conf"
+                                },
+                                {
+                                    "key": "server-cert",
+                                    "path": "server-cert"
+                                },
+                                {
+                                    "key": "server-key",
+                                    "path": "server-key"
+                                },
+                                {
+                                    "key": "servers",
+                                    "path": "servers"
+                                },
+                                {
+                                    "key": "upstreams",
+                                    "path": "upstreams"
+                                },
+                                {
+                                    "key": "placeholder",
+                                    "path": ".placeholder"
+                                }
+                            ],
+                            "name": "nova-api-files"
+                        },
+                        "name": "files"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "keystoneauthtokenj",
+                                    "path": "keystone_authtoken.j2"
+                                },
+                                {
+                                    "key": "oslomessagingj",
+                                    "path": "oslo_messaging.j2"
+                                }
+                            ],
+                            "name": "exports"
+                        },
+                        "name": "exports"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "nodes-config",
+                                    "path": "nodes-config.json"
+                                }
+                            ],
+                            "name": "nodes-config"
+                        },
+                        "name": "nodes-config"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "service-config",
+                                    "path": "service-config.json"
+                                }
+                            ],
+                            "name": "nova-api-service-config"
+                        },
+                        "name": "service-config"
+                    },
+                    {
+                        "name": "default-token-cghh4",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-cghh4"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:12:30Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:12:51Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:12:30Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://2af8e129a353fd25d3b39a3e2500b4075f80db98aba6af52a737ae8ea0a5ef17",
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/9.0/mitaka/nginx:latest",
+                        "imageID": "docker-pullable://docker-dev-virtual.docker.mirantis.net/mirantis/ccp/9.0/mitaka/nginx@sha256:3e2ccb9779ff988196a123328251c00ad5daf4aa41d03257f6e15458162d6e38",
+                        "lastState": {},
+                        "name": "nginx-nova-api",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-03-23T16:12:36Z"
+                            }
+                        }
+                    },
+                    {
+                        "containerID": "docker://6ad893972b719e3a0e108907ae8f2d7cc394e35372001f2072caeb22fa2bf019",
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-api:latest",
+                        "imageID": "docker-pullable://docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-api@sha256:db110b46804475af765473557008432226323a25395a281c320b2a821247f071",
+                        "lastState": {},
+                        "name": "nova-api",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-03-23T16:12:35Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "192.168.0.163",
+                "phase": "Running",
+                "podIP": "10.101.243.11",
+                "startTime": "2017-03-23T16:12:30Z"
+            }
+        },
+        {
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicaSet\",\"namespace\":\"ccp\",\"name\":\"nova-compute-3713302774\",\"uid\":\"95a8b306-0fe3-11e7-a5df-fa163e96cbdb\",\"apiVersion\":\"extensions\",\"resourceVersion\":\"412714\"}}\n",
+                    "scheduler.alpha.kubernetes.io/affinity": "{\"nodeAffinity\": {\"requiredDuringSchedulingIgnoredDuringExecution\": {\"nodeSelectorTerms\": [{\"matchExpressions\": [{\"key\": \"kubernetes.io/hostname\", \"operator\": \"In\", \"values\": [\"ikalnitsky-k8s-2\", \"ikalnitsky-k8s-3\", \"ikalnitsky-k8s-4\"]}]}]}}, \"podAntiAffinity\": {\"requiredDuringSchedulingIgnoredDuringExecution\": [{\"labelSelector\": {\"matchLabels\": {\"app\": \"nova-compute\"}}, \"namespaces\": [], \"topologyKey\": \"kubernetes.io/hostname\"}]}}"
+                },
+                "creationTimestamp": "2017-03-23T16:13:37Z",
+                "generateName": "nova-compute-3713302774-",
+                "labels": {
+                    "app": "nova-compute",
+                    "ccp": "true",
+                    "ccp-component": "nova",
+                    "pod-template-hash": "3713302774"
+                },
+                "name": "nova-compute-3713302774-tc99c",
+                "namespace": "ccp",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "extensions/v1beta1",
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "nova-compute-3713302774",
+                        "uid": "95a8b306-0fe3-11e7-a5df-fa163e96cbdb"
+                    }
+                ],
+                "resourceVersion": "412755",
+                "selfLink": "/api/v1/namespaces/ccp/pods/nova-compute-3713302774-tc99c",
+                "uid": "ac2a128d-0fe3-11e7-a5df-fa163e96cbdb"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "command": [
+                            "dumb-init",
+                            "/usr/bin/python",
+                            "/opt/ccp_start_script/bin/start_script.py",
+                            "provision",
+                            "nova-compute"
+                        ],
+                        "env": [
+                            {
+                                "name": "CCP_NODE_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "spec.nodeName"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CCP_POD_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "metadata.name"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CPU_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.cpu"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "MEMORY_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.memory"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CM_VERSION",
+                                "value": "4051234051244064394064414064538c0dab37d9ed0e72211ad1e15d07d369817c4899"
+                            }
+                        ],
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-compute:latest",
+                        "imagePullPolicy": "Always",
+                        "name": "nova-compute",
+                        "readinessProbe": {
+                            "exec": {
+                                "command": [
+                                    "/usr/bin/python",
+                                    "/opt/ccp_start_script/bin/start_script.py",
+                                    "status",
+                                    "nova-compute"
+                                ]
+                            },
+                            "failureThreshold": 3,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "privileged": true
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/etc/ccp/globals",
+                                "name": "globals"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/global-secrets",
+                                "name": "global-secrets"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/role",
+                                "name": "role"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/meta",
+                                "name": "meta"
+                            },
+                            {
+                                "mountPath": "/opt/ccp_start_script/bin",
+                                "name": "start-script"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/exports",
+                                "name": "exports"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/files",
+                                "name": "files"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/nodes-config",
+                                "name": "nodes-config"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/service-config",
+                                "name": "service-config"
+                            },
+                            {
+                                "mountPath": "/run",
+                                "name": "run"
+                            },
+                            {
+                                "mountPath": "/lib/modules",
+                                "name": "modules"
+                            },
+                            {
+                                "mountPath": "/var/lib/nova",
+                                "name": "nova"
+                            },
+                            {
+                                "mountPath": "/var/lib/libvirt",
+                                "name": "libvirt"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-cghh4",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "hostNetwork": true,
+                "imagePullSecrets": [
+                    {
+                        "name": "registry-key"
+                    }
+                ],
+                "nodeName": "ikalnitsky-k8s-2",
+                "restartPolicy": "Always",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "globals",
+                                    "path": "globals.json"
+                                }
+                            ],
+                            "name": "globals"
+                        },
+                        "name": "globals"
+                    },
+                    {
+                        "name": "global-secrets",
+                        "secret": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "global-secrets",
+                                    "path": "global-secrets.json"
+                                }
+                            ],
+                            "secretName": "global-secrets"
+                        }
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "start-script",
+                                    "path": "start_script.py"
+                                }
+                            ],
+                            "name": "start-script"
+                        },
+                        "name": "start-script"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "nova-compute",
+                                    "path": "nova-compute.json"
+                                }
+                            ],
+                            "name": "nova-compute-role"
+                        },
+                        "name": "role"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "meta",
+                                    "path": "meta.json"
+                                }
+                            ],
+                            "name": "nova-compute-meta"
+                        },
+                        "name": "meta"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "ca-cert",
+                                    "path": "ca-cert"
+                                },
+                                {
+                                    "key": "libvirt-cacert",
+                                    "path": "libvirt-cacert"
+                                },
+                                {
+                                    "key": "nova.conf",
+                                    "path": "nova.conf"
+                                },
+                                {
+                                    "key": "placeholder",
+                                    "path": ".placeholder"
+                                }
+                            ],
+                            "name": "nova-compute-files"
+                        },
+                        "name": "files"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "keystoneauthtokenj",
+                                    "path": "keystone_authtoken.j2"
+                                },
+                                {
+                                    "key": "oslomessagingj",
+                                    "path": "oslo_messaging.j2"
+                                }
+                            ],
+                            "name": "exports"
+                        },
+                        "name": "exports"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "nodes-config",
+                                    "path": "nodes-config.json"
+                                }
+                            ],
+                            "name": "nodes-config"
+                        },
+                        "name": "nodes-config"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "service-config",
+                                    "path": "service-config.json"
+                                }
+                            ],
+                            "name": "nova-compute-service-config"
+                        },
+                        "name": "service-config"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/run"
+                        },
+                        "name": "run"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/lib/modules"
+                        },
+                        "name": "modules"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/var/lib/nova"
+                        },
+                        "name": "nova"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/var/lib/libvirt"
+                        },
+                        "name": "libvirt"
+                    },
+                    {
+                        "name": "default-token-cghh4",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-cghh4"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:13:40Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:13:51Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:13:40Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://53ab3f544ec7194ec9849f5a47f243690a8b0d012e298c2d51314f06684a0c71",
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-compute:latest",
+                        "imageID": "docker-pullable://docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-compute@sha256:5255102b4e4d4326ce8ec5e445430a2155bbbbe03437aa48d9fdda38fa906469",
+                        "lastState": {},
+                        "name": "nova-compute",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-03-23T16:13:43Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "192.168.0.160",
+                "phase": "Running",
+                "podIP": "192.168.0.160",
+                "startTime": "2017-03-23T16:13:40Z"
+            }
+        },
+        {
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicaSet\",\"namespace\":\"ccp\",\"name\":\"nova-compute-3713302774\",\"uid\":\"95a8b306-0fe3-11e7-a5df-fa163e96cbdb\",\"apiVersion\":\"extensions\",\"resourceVersion\":\"412593\"}}\n",
+                    "scheduler.alpha.kubernetes.io/affinity": "{\"nodeAffinity\": {\"requiredDuringSchedulingIgnoredDuringExecution\": {\"nodeSelectorTerms\": [{\"matchExpressions\": [{\"key\": \"kubernetes.io/hostname\", \"operator\": \"In\", \"values\": [\"ikalnitsky-k8s-2\", \"ikalnitsky-k8s-3\", \"ikalnitsky-k8s-4\"]}]}]}}, \"podAntiAffinity\": {\"requiredDuringSchedulingIgnoredDuringExecution\": [{\"labelSelector\": {\"matchLabels\": {\"app\": \"nova-compute\"}}, \"namespaces\": [], \"topologyKey\": \"kubernetes.io/hostname\"}]}}"
+                },
+                "creationTimestamp": "2017-03-23T16:13:00Z",
+                "generateName": "nova-compute-3713302774-",
+                "labels": {
+                    "app": "nova-compute",
+                    "ccp": "true",
+                    "ccp-component": "nova",
+                    "pod-template-hash": "3713302774"
+                },
+                "name": "nova-compute-3713302774-vjm2j",
+                "namespace": "ccp",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "extensions/v1beta1",
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "nova-compute-3713302774",
+                        "uid": "95a8b306-0fe3-11e7-a5df-fa163e96cbdb"
+                    }
+                ],
+                "resourceVersion": "412632",
+                "selfLink": "/api/v1/namespaces/ccp/pods/nova-compute-3713302774-vjm2j",
+                "uid": "95b3e019-0fe3-11e7-a5df-fa163e96cbdb"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "command": [
+                            "dumb-init",
+                            "/usr/bin/python",
+                            "/opt/ccp_start_script/bin/start_script.py",
+                            "provision",
+                            "nova-compute"
+                        ],
+                        "env": [
+                            {
+                                "name": "CCP_NODE_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "spec.nodeName"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CCP_POD_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "metadata.name"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CPU_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.cpu"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "MEMORY_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.memory"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CM_VERSION",
+                                "value": "4051234051244064394064414064538c0dab37d9ed0e72211ad1e15d07d369817c4899"
+                            }
+                        ],
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-compute:latest",
+                        "imagePullPolicy": "Always",
+                        "name": "nova-compute",
+                        "readinessProbe": {
+                            "exec": {
+                                "command": [
+                                    "/usr/bin/python",
+                                    "/opt/ccp_start_script/bin/start_script.py",
+                                    "status",
+                                    "nova-compute"
+                                ]
+                            },
+                            "failureThreshold": 3,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "privileged": true
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/etc/ccp/globals",
+                                "name": "globals"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/global-secrets",
+                                "name": "global-secrets"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/role",
+                                "name": "role"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/meta",
+                                "name": "meta"
+                            },
+                            {
+                                "mountPath": "/opt/ccp_start_script/bin",
+                                "name": "start-script"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/exports",
+                                "name": "exports"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/files",
+                                "name": "files"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/nodes-config",
+                                "name": "nodes-config"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/service-config",
+                                "name": "service-config"
+                            },
+                            {
+                                "mountPath": "/run",
+                                "name": "run"
+                            },
+                            {
+                                "mountPath": "/lib/modules",
+                                "name": "modules"
+                            },
+                            {
+                                "mountPath": "/var/lib/nova",
+                                "name": "nova"
+                            },
+                            {
+                                "mountPath": "/var/lib/libvirt",
+                                "name": "libvirt"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-cghh4",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "hostNetwork": true,
+                "imagePullSecrets": [
+                    {
+                        "name": "registry-key"
+                    }
+                ],
+                "nodeName": "ikalnitsky-k8s-3",
+                "restartPolicy": "Always",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "globals",
+                                    "path": "globals.json"
+                                }
+                            ],
+                            "name": "globals"
+                        },
+                        "name": "globals"
+                    },
+                    {
+                        "name": "global-secrets",
+                        "secret": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "global-secrets",
+                                    "path": "global-secrets.json"
+                                }
+                            ],
+                            "secretName": "global-secrets"
+                        }
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "start-script",
+                                    "path": "start_script.py"
+                                }
+                            ],
+                            "name": "start-script"
+                        },
+                        "name": "start-script"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "nova-compute",
+                                    "path": "nova-compute.json"
+                                }
+                            ],
+                            "name": "nova-compute-role"
+                        },
+                        "name": "role"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "meta",
+                                    "path": "meta.json"
+                                }
+                            ],
+                            "name": "nova-compute-meta"
+                        },
+                        "name": "meta"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "ca-cert",
+                                    "path": "ca-cert"
+                                },
+                                {
+                                    "key": "libvirt-cacert",
+                                    "path": "libvirt-cacert"
+                                },
+                                {
+                                    "key": "nova.conf",
+                                    "path": "nova.conf"
+                                },
+                                {
+                                    "key": "placeholder",
+                                    "path": ".placeholder"
+                                }
+                            ],
+                            "name": "nova-compute-files"
+                        },
+                        "name": "files"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "keystoneauthtokenj",
+                                    "path": "keystone_authtoken.j2"
+                                },
+                                {
+                                    "key": "oslomessagingj",
+                                    "path": "oslo_messaging.j2"
+                                }
+                            ],
+                            "name": "exports"
+                        },
+                        "name": "exports"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "nodes-config",
+                                    "path": "nodes-config.json"
+                                }
+                            ],
+                            "name": "nodes-config"
+                        },
+                        "name": "nodes-config"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "service-config",
+                                    "path": "service-config.json"
+                                }
+                            ],
+                            "name": "nova-compute-service-config"
+                        },
+                        "name": "service-config"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/run"
+                        },
+                        "name": "run"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/lib/modules"
+                        },
+                        "name": "modules"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/var/lib/nova"
+                        },
+                        "name": "nova"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/var/lib/libvirt"
+                        },
+                        "name": "libvirt"
+                    },
+                    {
+                        "name": "default-token-cghh4",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-cghh4"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:13:03Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:13:08Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:13:03Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://3d7e0acfd84c15082ff93ed419c2a84b4758990449661638838f1d01af09f479",
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-compute:latest",
+                        "imageID": "docker-pullable://docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-compute@sha256:5255102b4e4d4326ce8ec5e445430a2155bbbbe03437aa48d9fdda38fa906469",
+                        "lastState": {},
+                        "name": "nova-compute",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-03-23T16:13:05Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "192.168.0.163",
+                "phase": "Running",
+                "podIP": "192.168.0.163",
+                "startTime": "2017-03-23T16:13:03Z"
+            }
+        },
+        {
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicaSet\",\"namespace\":\"ccp\",\"name\":\"nova-compute-3713302774\",\"uid\":\"95a8b306-0fe3-11e7-a5df-fa163e96cbdb\",\"apiVersion\":\"extensions\",\"resourceVersion\":\"412640\"}}\n",
+                    "scheduler.alpha.kubernetes.io/affinity": "{\"nodeAffinity\": {\"requiredDuringSchedulingIgnoredDuringExecution\": {\"nodeSelectorTerms\": [{\"matchExpressions\": [{\"key\": \"kubernetes.io/hostname\", \"operator\": \"In\", \"values\": [\"ikalnitsky-k8s-2\", \"ikalnitsky-k8s-3\", \"ikalnitsky-k8s-4\"]}]}]}}, \"podAntiAffinity\": {\"requiredDuringSchedulingIgnoredDuringExecution\": [{\"labelSelector\": {\"matchLabels\": {\"app\": \"nova-compute\"}}, \"namespaces\": [], \"topologyKey\": \"kubernetes.io/hostname\"}]}}"
+                },
+                "creationTimestamp": "2017-03-23T16:13:11Z",
+                "generateName": "nova-compute-3713302774-",
+                "labels": {
+                    "app": "nova-compute",
+                    "ccp": "true",
+                    "ccp-component": "nova",
+                    "pod-template-hash": "3713302774"
+                },
+                "name": "nova-compute-3713302774-zj7ml",
+                "namespace": "ccp",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "extensions/v1beta1",
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "nova-compute-3713302774",
+                        "uid": "95a8b306-0fe3-11e7-a5df-fa163e96cbdb"
+                    }
+                ],
+                "resourceVersion": "412704",
+                "selfLink": "/api/v1/namespaces/ccp/pods/nova-compute-3713302774-zj7ml",
+                "uid": "9c711afe-0fe3-11e7-a5df-fa163e96cbdb"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "command": [
+                            "dumb-init",
+                            "/usr/bin/python",
+                            "/opt/ccp_start_script/bin/start_script.py",
+                            "provision",
+                            "nova-compute"
+                        ],
+                        "env": [
+                            {
+                                "name": "CCP_NODE_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "spec.nodeName"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CCP_POD_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "metadata.name"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CPU_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.cpu"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "MEMORY_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.memory"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CM_VERSION",
+                                "value": "4051234051244064394064414064538c0dab37d9ed0e72211ad1e15d07d369817c4899"
+                            }
+                        ],
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-compute:latest",
+                        "imagePullPolicy": "Always",
+                        "name": "nova-compute",
+                        "readinessProbe": {
+                            "exec": {
+                                "command": [
+                                    "/usr/bin/python",
+                                    "/opt/ccp_start_script/bin/start_script.py",
+                                    "status",
+                                    "nova-compute"
+                                ]
+                            },
+                            "failureThreshold": 3,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "privileged": true
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/etc/ccp/globals",
+                                "name": "globals"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/global-secrets",
+                                "name": "global-secrets"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/role",
+                                "name": "role"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/meta",
+                                "name": "meta"
+                            },
+                            {
+                                "mountPath": "/opt/ccp_start_script/bin",
+                                "name": "start-script"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/exports",
+                                "name": "exports"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/files",
+                                "name": "files"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/nodes-config",
+                                "name": "nodes-config"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/service-config",
+                                "name": "service-config"
+                            },
+                            {
+                                "mountPath": "/run",
+                                "name": "run"
+                            },
+                            {
+                                "mountPath": "/lib/modules",
+                                "name": "modules"
+                            },
+                            {
+                                "mountPath": "/var/lib/nova",
+                                "name": "nova"
+                            },
+                            {
+                                "mountPath": "/var/lib/libvirt",
+                                "name": "libvirt"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-cghh4",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "hostNetwork": true,
+                "imagePullSecrets": [
+                    {
+                        "name": "registry-key"
+                    }
+                ],
+                "nodeName": "ikalnitsky-k8s-4",
+                "restartPolicy": "Always",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "globals",
+                                    "path": "globals.json"
+                                }
+                            ],
+                            "name": "globals"
+                        },
+                        "name": "globals"
+                    },
+                    {
+                        "name": "global-secrets",
+                        "secret": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "global-secrets",
+                                    "path": "global-secrets.json"
+                                }
+                            ],
+                            "secretName": "global-secrets"
+                        }
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "start-script",
+                                    "path": "start_script.py"
+                                }
+                            ],
+                            "name": "start-script"
+                        },
+                        "name": "start-script"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "nova-compute",
+                                    "path": "nova-compute.json"
+                                }
+                            ],
+                            "name": "nova-compute-role"
+                        },
+                        "name": "role"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "meta",
+                                    "path": "meta.json"
+                                }
+                            ],
+                            "name": "nova-compute-meta"
+                        },
+                        "name": "meta"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "ca-cert",
+                                    "path": "ca-cert"
+                                },
+                                {
+                                    "key": "libvirt-cacert",
+                                    "path": "libvirt-cacert"
+                                },
+                                {
+                                    "key": "nova.conf",
+                                    "path": "nova.conf"
+                                },
+                                {
+                                    "key": "placeholder",
+                                    "path": ".placeholder"
+                                }
+                            ],
+                            "name": "nova-compute-files"
+                        },
+                        "name": "files"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "keystoneauthtokenj",
+                                    "path": "keystone_authtoken.j2"
+                                },
+                                {
+                                    "key": "oslomessagingj",
+                                    "path": "oslo_messaging.j2"
+                                }
+                            ],
+                            "name": "exports"
+                        },
+                        "name": "exports"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "nodes-config",
+                                    "path": "nodes-config.json"
+                                }
+                            ],
+                            "name": "nodes-config"
+                        },
+                        "name": "nodes-config"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "service-config",
+                                    "path": "service-config.json"
+                                }
+                            ],
+                            "name": "nova-compute-service-config"
+                        },
+                        "name": "service-config"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/run"
+                        },
+                        "name": "run"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/lib/modules"
+                        },
+                        "name": "modules"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/var/lib/nova"
+                        },
+                        "name": "nova"
+                    },
+                    {
+                        "hostPath": {
+                            "path": "/var/lib/libvirt"
+                        },
+                        "name": "libvirt"
+                    },
+                    {
+                        "name": "default-token-cghh4",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-cghh4"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:13:26Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:13:36Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:13:26Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://98cfd466448d8e70afb3e22b62891f364fa0f4f31439547fef75ca2f15cfce20",
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-compute:latest",
+                        "imageID": "docker-pullable://docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-compute@sha256:5255102b4e4d4326ce8ec5e445430a2155bbbbe03437aa48d9fdda38fa906469",
+                        "lastState": {},
+                        "name": "nova-compute",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-03-23T16:13:28Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "192.168.0.162",
+                "phase": "Running",
+                "podIP": "192.168.0.162",
+                "startTime": "2017-03-23T16:13:26Z"
+            }
+        },
+        {
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicaSet\",\"namespace\":\"ccp\",\"name\":\"nova-conductor-3425521465\",\"uid\":\"62708024-0fe3-11e7-a5df-fa163e96cbdb\",\"apiVersion\":\"extensions\",\"resourceVersion\":\"412270\"}}\n",
+                    "scheduler.alpha.kubernetes.io/affinity": "{\"nodeAffinity\": {\"requiredDuringSchedulingIgnoredDuringExecution\": {\"nodeSelectorTerms\": [{\"matchExpressions\": [{\"key\": \"kubernetes.io/hostname\", \"operator\": \"In\", \"values\": [\"ikalnitsky-k8s-2\", \"ikalnitsky-k8s-3\", \"ikalnitsky-k8s-4\"]}]}]}}}"
+                },
+                "creationTimestamp": "2017-03-23T16:11:34Z",
+                "generateName": "nova-conductor-3425521465-",
+                "labels": {
+                    "app": "nova-conductor",
+                    "ccp": "true",
+                    "ccp-component": "nova",
+                    "pod-template-hash": "3425521465"
+                },
+                "name": "nova-conductor-3425521465-d5trf",
+                "namespace": "ccp",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "extensions/v1beta1",
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "nova-conductor-3425521465",
+                        "uid": "62708024-0fe3-11e7-a5df-fa163e96cbdb"
+                    }
+                ],
+                "resourceVersion": "412313",
+                "selfLink": "/api/v1/namespaces/ccp/pods/nova-conductor-3425521465-d5trf",
+                "uid": "6274b5a8-0fe3-11e7-a5df-fa163e96cbdb"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "command": [
+                            "dumb-init",
+                            "/usr/bin/python",
+                            "/opt/ccp_start_script/bin/start_script.py",
+                            "provision",
+                            "nova-conductor"
+                        ],
+                        "env": [
+                            {
+                                "name": "CCP_NODE_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "spec.nodeName"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CCP_POD_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "metadata.name"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CPU_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.cpu"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "MEMORY_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.memory"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CM_VERSION",
+                                "value": "4051234051244064674064714064836b3fb1b5638363bfc164fded1024e743ffd2958c"
+                            }
+                        ],
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-conductor:latest",
+                        "imagePullPolicy": "Always",
+                        "name": "nova-conductor",
+                        "readinessProbe": {
+                            "exec": {
+                                "command": [
+                                    "/usr/bin/python",
+                                    "/opt/ccp_start_script/bin/start_script.py",
+                                    "status",
+                                    "nova-conductor"
+                                ]
+                            },
+                            "failureThreshold": 3,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "privileged": false
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/etc/ccp/globals",
+                                "name": "globals"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/global-secrets",
+                                "name": "global-secrets"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/role",
+                                "name": "role"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/meta",
+                                "name": "meta"
+                            },
+                            {
+                                "mountPath": "/opt/ccp_start_script/bin",
+                                "name": "start-script"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/exports",
+                                "name": "exports"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/files",
+                                "name": "files"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/nodes-config",
+                                "name": "nodes-config"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/service-config",
+                                "name": "service-config"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-cghh4",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "imagePullSecrets": [
+                    {
+                        "name": "registry-key"
+                    }
+                ],
+                "nodeName": "ikalnitsky-k8s-4",
+                "restartPolicy": "Always",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "globals",
+                                    "path": "globals.json"
+                                }
+                            ],
+                            "name": "globals"
+                        },
+                        "name": "globals"
+                    },
+                    {
+                        "name": "global-secrets",
+                        "secret": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "global-secrets",
+                                    "path": "global-secrets.json"
+                                }
+                            ],
+                            "secretName": "global-secrets"
+                        }
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "start-script",
+                                    "path": "start_script.py"
+                                }
+                            ],
+                            "name": "start-script"
+                        },
+                        "name": "start-script"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "nova-conductor",
+                                    "path": "nova-conductor.json"
+                                }
+                            ],
+                            "name": "nova-conductor-role"
+                        },
+                        "name": "role"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "meta",
+                                    "path": "meta.json"
+                                }
+                            ],
+                            "name": "nova-conductor-meta"
+                        },
+                        "name": "meta"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "nova.conf",
+                                    "path": "nova.conf"
+                                },
+                                {
+                                    "key": "placeholder",
+                                    "path": ".placeholder"
+                                }
+                            ],
+                            "name": "nova-conductor-files"
+                        },
+                        "name": "files"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "keystoneauthtokenj",
+                                    "path": "keystone_authtoken.j2"
+                                },
+                                {
+                                    "key": "oslomessagingj",
+                                    "path": "oslo_messaging.j2"
+                                }
+                            ],
+                            "name": "exports"
+                        },
+                        "name": "exports"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "nodes-config",
+                                    "path": "nodes-config.json"
+                                }
+                            ],
+                            "name": "nodes-config"
+                        },
+                        "name": "nodes-config"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "service-config",
+                                    "path": "service-config.json"
+                                }
+                            ],
+                            "name": "nova-conductor-service-config"
+                        },
+                        "name": "service-config"
+                    },
+                    {
+                        "name": "default-token-cghh4",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-cghh4"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:11:34Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:11:44Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:11:34Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://3da103d0a929da3d887c60ea7d17392536b184af4da4b71fa9d9e925b415373c",
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-conductor:latest",
+                        "imageID": "docker-pullable://docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-conductor@sha256:b2e60d74ff5a2192795076d05ceb095d919a2bbe9233d52d98b1d880ea318b4d",
+                        "lastState": {},
+                        "name": "nova-conductor",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-03-23T16:11:37Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "192.168.0.162",
+                "phase": "Running",
+                "podIP": "10.101.182.41",
+                "startTime": "2017-03-23T16:11:34Z"
+            }
+        },
+        {
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicaSet\",\"namespace\":\"ccp\",\"name\":\"nova-consoleauth-3960559698\",\"uid\":\"6f099331-0fe3-11e7-a5df-fa163e96cbdb\",\"apiVersion\":\"extensions\",\"resourceVersion\":\"412336\"}}\n",
+                    "scheduler.alpha.kubernetes.io/affinity": "{\"nodeAffinity\": {\"requiredDuringSchedulingIgnoredDuringExecution\": {\"nodeSelectorTerms\": [{\"matchExpressions\": [{\"key\": \"kubernetes.io/hostname\", \"operator\": \"In\", \"values\": [\"ikalnitsky-k8s-2\", \"ikalnitsky-k8s-3\", \"ikalnitsky-k8s-4\"]}]}]}}}"
+                },
+                "creationTimestamp": "2017-03-23T16:11:55Z",
+                "generateName": "nova-consoleauth-3960559698-",
+                "labels": {
+                    "app": "nova-consoleauth",
+                    "ccp": "true",
+                    "ccp-component": "nova",
+                    "pod-template-hash": "3960559698"
+                },
+                "name": "nova-consoleauth-3960559698-vs04v",
+                "namespace": "ccp",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "extensions/v1beta1",
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "nova-consoleauth-3960559698",
+                        "uid": "6f099331-0fe3-11e7-a5df-fa163e96cbdb"
+                    }
+                ],
+                "resourceVersion": "412460",
+                "selfLink": "/api/v1/namespaces/ccp/pods/nova-consoleauth-3960559698-vs04v",
+                "uid": "6f0e0a7d-0fe3-11e7-a5df-fa163e96cbdb"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "command": [
+                            "dumb-init",
+                            "/usr/bin/python",
+                            "/opt/ccp_start_script/bin/start_script.py",
+                            "provision",
+                            "nova-consoleauth"
+                        ],
+                        "env": [
+                            {
+                                "name": "CCP_NODE_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "spec.nodeName"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CCP_POD_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "metadata.name"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CPU_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.cpu"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "MEMORY_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.memory"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CM_VERSION",
+                                "value": "4051234051244066194066234066266b3fb1b5638363bfc164fded1024e743ffd2958c"
+                            }
+                        ],
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-consoleauth:latest",
+                        "imagePullPolicy": "Always",
+                        "name": "nova-consoleauth",
+                        "readinessProbe": {
+                            "exec": {
+                                "command": [
+                                    "/usr/bin/python",
+                                    "/opt/ccp_start_script/bin/start_script.py",
+                                    "status",
+                                    "nova-consoleauth"
+                                ]
+                            },
+                            "failureThreshold": 3,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "privileged": false
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/etc/ccp/globals",
+                                "name": "globals"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/global-secrets",
+                                "name": "global-secrets"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/role",
+                                "name": "role"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/meta",
+                                "name": "meta"
+                            },
+                            {
+                                "mountPath": "/opt/ccp_start_script/bin",
+                                "name": "start-script"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/exports",
+                                "name": "exports"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/files",
+                                "name": "files"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/nodes-config",
+                                "name": "nodes-config"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/service-config",
+                                "name": "service-config"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-cghh4",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "imagePullSecrets": [
+                    {
+                        "name": "registry-key"
+                    }
+                ],
+                "nodeName": "ikalnitsky-k8s-2",
+                "restartPolicy": "Always",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "globals",
+                                    "path": "globals.json"
+                                }
+                            ],
+                            "name": "globals"
+                        },
+                        "name": "globals"
+                    },
+                    {
+                        "name": "global-secrets",
+                        "secret": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "global-secrets",
+                                    "path": "global-secrets.json"
+                                }
+                            ],
+                            "secretName": "global-secrets"
+                        }
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "start-script",
+                                    "path": "start_script.py"
+                                }
+                            ],
+                            "name": "start-script"
+                        },
+                        "name": "start-script"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "nova-consoleauth",
+                                    "path": "nova-consoleauth.json"
+                                }
+                            ],
+                            "name": "nova-consoleauth-role"
+                        },
+                        "name": "role"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "meta",
+                                    "path": "meta.json"
+                                }
+                            ],
+                            "name": "nova-consoleauth-meta"
+                        },
+                        "name": "meta"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "nova.conf",
+                                    "path": "nova.conf"
+                                },
+                                {
+                                    "key": "placeholder",
+                                    "path": ".placeholder"
+                                }
+                            ],
+                            "name": "nova-consoleauth-files"
+                        },
+                        "name": "files"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "keystoneauthtokenj",
+                                    "path": "keystone_authtoken.j2"
+                                },
+                                {
+                                    "key": "oslomessagingj",
+                                    "path": "oslo_messaging.j2"
+                                }
+                            ],
+                            "name": "exports"
+                        },
+                        "name": "exports"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "nodes-config",
+                                    "path": "nodes-config.json"
+                                }
+                            ],
+                            "name": "nodes-config"
+                        },
+                        "name": "nodes-config"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "service-config",
+                                    "path": "service-config.json"
+                                }
+                            ],
+                            "name": "nova-consoleauth-service-config"
+                        },
+                        "name": "service-config"
+                    },
+                    {
+                        "name": "default-token-cghh4",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-cghh4"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:11:55Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:12:07Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:11:55Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://e532851db8ce5060f7e245aa475bc60c124d012394cb486f7470e71be3aa6530",
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-consoleauth:latest",
+                        "imageID": "docker-pullable://docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-consoleauth@sha256:10780b4cd1e52028e3e0149fcb5be495f9deca632e2eaaa4970121d5760b98a6",
+                        "lastState": {},
+                        "name": "nova-consoleauth",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-03-23T16:11:58Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "192.168.0.160",
+                "phase": "Running",
+                "podIP": "10.101.134.206",
+                "startTime": "2017-03-23T16:11:55Z"
+            }
+        },
+        {
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicaSet\",\"namespace\":\"ccp\",\"name\":\"nova-novncproxy-4252858953\",\"uid\":\"6f195834-0fe3-11e7-a5df-fa163e96cbdb\",\"apiVersion\":\"extensions\",\"resourceVersion\":\"412346\"}}\n",
+                    "scheduler.alpha.kubernetes.io/affinity": "{\"nodeAffinity\": {\"requiredDuringSchedulingIgnoredDuringExecution\": {\"nodeSelectorTerms\": [{\"matchExpressions\": [{\"key\": \"kubernetes.io/hostname\", \"operator\": \"In\", \"values\": [\"ikalnitsky-k8s-2\", \"ikalnitsky-k8s-3\", \"ikalnitsky-k8s-4\"]}]}]}}}"
+                },
+                "creationTimestamp": "2017-03-23T16:11:55Z",
+                "generateName": "nova-novncproxy-4252858953-",
+                "labels": {
+                    "app": "nova-novncproxy",
+                    "ccp": "true",
+                    "ccp-component": "nova",
+                    "pod-template-hash": "4252858953"
+                },
+                "name": "nova-novncproxy-4252858953-zw0cv",
+                "namespace": "ccp",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "extensions/v1beta1",
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "nova-novncproxy-4252858953",
+                        "uid": "6f195834-0fe3-11e7-a5df-fa163e96cbdb"
+                    }
+                ],
+                "resourceVersion": "412477",
+                "selfLink": "/api/v1/namespaces/ccp/pods/nova-novncproxy-4252858953-zw0cv",
+                "uid": "6f1bc990-0fe3-11e7-a5df-fa163e96cbdb"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "command": [
+                            "dumb-init",
+                            "/usr/bin/python",
+                            "/opt/ccp_start_script/bin/start_script.py",
+                            "provision",
+                            "nova-novncproxy"
+                        ],
+                        "env": [
+                            {
+                                "name": "CCP_NODE_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "spec.nodeName"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CCP_POD_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "metadata.name"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CPU_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.cpu"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "MEMORY_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.memory"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CM_VERSION",
+                                "value": "405123405124406412406413406415075f29f48d178656adb2a9d3a8aa3991dc48d7d3"
+                            }
+                        ],
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-novncproxy:latest",
+                        "imagePullPolicy": "Always",
+                        "name": "nova-novncproxy",
+                        "readinessProbe": {
+                            "exec": {
+                                "command": [
+                                    "/usr/bin/python",
+                                    "/opt/ccp_start_script/bin/start_script.py",
+                                    "status",
+                                    "nova-novncproxy"
+                                ]
+                            },
+                            "failureThreshold": 3,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "privileged": false
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/etc/ccp/globals",
+                                "name": "globals"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/global-secrets",
+                                "name": "global-secrets"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/role",
+                                "name": "role"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/meta",
+                                "name": "meta"
+                            },
+                            {
+                                "mountPath": "/opt/ccp_start_script/bin",
+                                "name": "start-script"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/exports",
+                                "name": "exports"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/files",
+                                "name": "files"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/nodes-config",
+                                "name": "nodes-config"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/service-config",
+                                "name": "service-config"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-cghh4",
+                                "readOnly": true
+                            }
+                        ]
+                    },
+                    {
+                        "command": [
+                            "dumb-init",
+                            "/usr/bin/python",
+                            "/opt/ccp_start_script/bin/start_script.py",
+                            "provision",
+                            "nginx-nova-novncproxy"
+                        ],
+                        "env": [
+                            {
+                                "name": "CCP_NODE_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "spec.nodeName"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CCP_POD_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "metadata.name"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CPU_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.cpu"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "MEMORY_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.memory"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CM_VERSION",
+                                "value": "405123405124406412406413406415075f29f48d178656adb2a9d3a8aa3991dc48d7d3"
+                            }
+                        ],
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/9.0/mitaka/nginx:latest",
+                        "imagePullPolicy": "Always",
+                        "name": "nginx-nova-novncproxy",
+                        "readinessProbe": {
+                            "exec": {
+                                "command": [
+                                    "/usr/bin/python",
+                                    "/opt/ccp_start_script/bin/start_script.py",
+                                    "status",
+                                    "nginx-nova-novncproxy"
+                                ]
+                            },
+                            "failureThreshold": 3,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "privileged": false
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/etc/ccp/globals",
+                                "name": "globals"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/global-secrets",
+                                "name": "global-secrets"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/role",
+                                "name": "role"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/meta",
+                                "name": "meta"
+                            },
+                            {
+                                "mountPath": "/opt/ccp_start_script/bin",
+                                "name": "start-script"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/exports",
+                                "name": "exports"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/files",
+                                "name": "files"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/nodes-config",
+                                "name": "nodes-config"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/service-config",
+                                "name": "service-config"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-cghh4",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "imagePullSecrets": [
+                    {
+                        "name": "registry-key"
+                    }
+                ],
+                "nodeName": "ikalnitsky-k8s-4",
+                "restartPolicy": "Always",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "globals",
+                                    "path": "globals.json"
+                                }
+                            ],
+                            "name": "globals"
+                        },
+                        "name": "globals"
+                    },
+                    {
+                        "name": "global-secrets",
+                        "secret": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "global-secrets",
+                                    "path": "global-secrets.json"
+                                }
+                            ],
+                            "secretName": "global-secrets"
+                        }
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "start-script",
+                                    "path": "start_script.py"
+                                }
+                            ],
+                            "name": "start-script"
+                        },
+                        "name": "start-script"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "nova-novncproxy",
+                                    "path": "nova-novncproxy.json"
+                                },
+                                {
+                                    "key": "nginx-nova-novncproxy",
+                                    "path": "nginx-nova-novncproxy.json"
+                                }
+                            ],
+                            "name": "nova-novncproxy-role"
+                        },
+                        "name": "role"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "meta",
+                                    "path": "meta.json"
+                                }
+                            ],
+                            "name": "nova-novncproxy-meta"
+                        },
+                        "name": "meta"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "ca-cert",
+                                    "path": "ca-cert"
+                                },
+                                {
+                                    "key": "nova.conf",
+                                    "path": "nova.conf"
+                                },
+                                {
+                                    "key": "server-cert",
+                                    "path": "server-cert"
+                                },
+                                {
+                                    "key": "server-key",
+                                    "path": "server-key"
+                                },
+                                {
+                                    "key": "servers",
+                                    "path": "servers"
+                                },
+                                {
+                                    "key": "upstreams",
+                                    "path": "upstreams"
+                                },
+                                {
+                                    "key": "placeholder",
+                                    "path": ".placeholder"
+                                }
+                            ],
+                            "name": "nova-novncproxy-files"
+                        },
+                        "name": "files"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "keystoneauthtokenj",
+                                    "path": "keystone_authtoken.j2"
+                                },
+                                {
+                                    "key": "oslomessagingj",
+                                    "path": "oslo_messaging.j2"
+                                }
+                            ],
+                            "name": "exports"
+                        },
+                        "name": "exports"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "nodes-config",
+                                    "path": "nodes-config.json"
+                                }
+                            ],
+                            "name": "nodes-config"
+                        },
+                        "name": "nodes-config"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "service-config",
+                                    "path": "service-config.json"
+                                }
+                            ],
+                            "name": "nova-novncproxy-service-config"
+                        },
+                        "name": "service-config"
+                    },
+                    {
+                        "name": "default-token-cghh4",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-cghh4"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:11:55Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:12:07Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:11:55Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://4805bfa64c6206443685f05631dc90354d41557cc5c3406c35b64d5d3d17fd1e",
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/9.0/mitaka/nginx:latest",
+                        "imageID": "docker-pullable://docker-dev-virtual.docker.mirantis.net/mirantis/ccp/9.0/mitaka/nginx@sha256:3e2ccb9779ff988196a123328251c00ad5daf4aa41d03257f6e15458162d6e38",
+                        "lastState": {},
+                        "name": "nginx-nova-novncproxy",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-03-23T16:12:02Z"
+                            }
+                        }
+                    },
+                    {
+                        "containerID": "docker://bf89f0f799ad6f159cbeff06d4034725b1ed2587267d1278b2f7718469fcd80d",
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-novncproxy:latest",
+                        "imageID": "docker-pullable://docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-novncproxy@sha256:4931918e8f7f3c0f83bf6e4abf2ca8beee2b10b174a4f8487cc400fe6ea2ece2",
+                        "lastState": {},
+                        "name": "nova-novncproxy",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-03-23T16:12:01Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "192.168.0.162",
+                "phase": "Running",
+                "podIP": "10.101.182.6",
+                "startTime": "2017-03-23T16:11:55Z"
+            }
+        },
+        {
+            "metadata": {
+                "annotations": {
+                    "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicaSet\",\"namespace\":\"ccp\",\"name\":\"nova-scheduler-1624854137\",\"uid\":\"6f341c4a-0fe3-11e7-a5df-fa163e96cbdb\",\"apiVersion\":\"extensions\",\"resourceVersion\":\"412364\"}}\n",
+                    "scheduler.alpha.kubernetes.io/affinity": "{\"nodeAffinity\": {\"requiredDuringSchedulingIgnoredDuringExecution\": {\"nodeSelectorTerms\": [{\"matchExpressions\": [{\"key\": \"kubernetes.io/hostname\", \"operator\": \"In\", \"values\": [\"ikalnitsky-k8s-2\", \"ikalnitsky-k8s-3\", \"ikalnitsky-k8s-4\"]}]}]}}}"
+                },
+                "creationTimestamp": "2017-03-23T16:11:55Z",
+                "generateName": "nova-scheduler-1624854137-",
+                "labels": {
+                    "app": "nova-scheduler",
+                    "ccp": "true",
+                    "ccp-component": "nova",
+                    "pod-template-hash": "1624854137"
+                },
+                "name": "nova-scheduler-1624854137-t5gqb",
+                "namespace": "ccp",
+                "ownerReferences": [
+                    {
+                        "apiVersion": "extensions/v1beta1",
+                        "controller": true,
+                        "kind": "ReplicaSet",
+                        "name": "nova-scheduler-1624854137",
+                        "uid": "6f341c4a-0fe3-11e7-a5df-fa163e96cbdb"
+                    }
+                ],
+                "resourceVersion": "412487",
+                "selfLink": "/api/v1/namespaces/ccp/pods/nova-scheduler-1624854137-t5gqb",
+                "uid": "6f3643c7-0fe3-11e7-a5df-fa163e96cbdb"
+            },
+            "spec": {
+                "containers": [
+                    {
+                        "command": [
+                            "dumb-init",
+                            "/usr/bin/python",
+                            "/opt/ccp_start_script/bin/start_script.py",
+                            "provision",
+                            "nova-scheduler"
+                        ],
+                        "env": [
+                            {
+                                "name": "CCP_NODE_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "spec.nodeName"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CCP_POD_NAME",
+                                "valueFrom": {
+                                    "fieldRef": {
+                                        "apiVersion": "v1",
+                                        "fieldPath": "metadata.name"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CPU_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.cpu"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "MEMORY_LIMIT",
+                                "valueFrom": {
+                                    "resourceFieldRef": {
+                                        "divisor": "0",
+                                        "resource": "limits.memory"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "CM_VERSION",
+                                "value": "4051234051244066344066394066496b3fb1b5638363bfc164fded1024e743ffd2958c"
+                            }
+                        ],
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-scheduler:latest",
+                        "imagePullPolicy": "Always",
+                        "name": "nova-scheduler",
+                        "readinessProbe": {
+                            "exec": {
+                                "command": [
+                                    "/usr/bin/python",
+                                    "/opt/ccp_start_script/bin/start_script.py",
+                                    "status",
+                                    "nova-scheduler"
+                                ]
+                            },
+                            "failureThreshold": 3,
+                            "periodSeconds": 10,
+                            "successThreshold": 1,
+                            "timeoutSeconds": 1
+                        },
+                        "resources": {},
+                        "securityContext": {
+                            "privileged": false
+                        },
+                        "terminationMessagePath": "/dev/termination-log",
+                        "volumeMounts": [
+                            {
+                                "mountPath": "/etc/ccp/globals",
+                                "name": "globals"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/global-secrets",
+                                "name": "global-secrets"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/role",
+                                "name": "role"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/meta",
+                                "name": "meta"
+                            },
+                            {
+                                "mountPath": "/opt/ccp_start_script/bin",
+                                "name": "start-script"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/exports",
+                                "name": "exports"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/files",
+                                "name": "files"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/nodes-config",
+                                "name": "nodes-config"
+                            },
+                            {
+                                "mountPath": "/etc/ccp/service-config",
+                                "name": "service-config"
+                            },
+                            {
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+                                "name": "default-token-cghh4",
+                                "readOnly": true
+                            }
+                        ]
+                    }
+                ],
+                "dnsPolicy": "ClusterFirst",
+                "imagePullSecrets": [
+                    {
+                        "name": "registry-key"
+                    }
+                ],
+                "nodeName": "ikalnitsky-k8s-4",
+                "restartPolicy": "Always",
+                "securityContext": {},
+                "serviceAccount": "default",
+                "serviceAccountName": "default",
+                "terminationGracePeriodSeconds": 30,
+                "volumes": [
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "globals",
+                                    "path": "globals.json"
+                                }
+                            ],
+                            "name": "globals"
+                        },
+                        "name": "globals"
+                    },
+                    {
+                        "name": "global-secrets",
+                        "secret": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "global-secrets",
+                                    "path": "global-secrets.json"
+                                }
+                            ],
+                            "secretName": "global-secrets"
+                        }
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "start-script",
+                                    "path": "start_script.py"
+                                }
+                            ],
+                            "name": "start-script"
+                        },
+                        "name": "start-script"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "nova-scheduler",
+                                    "path": "nova-scheduler.json"
+                                }
+                            ],
+                            "name": "nova-scheduler-role"
+                        },
+                        "name": "role"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "meta",
+                                    "path": "meta.json"
+                                }
+                            ],
+                            "name": "nova-scheduler-meta"
+                        },
+                        "name": "meta"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "nova.conf",
+                                    "path": "nova.conf"
+                                },
+                                {
+                                    "key": "placeholder",
+                                    "path": ".placeholder"
+                                }
+                            ],
+                            "name": "nova-scheduler-files"
+                        },
+                        "name": "files"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "keystoneauthtokenj",
+                                    "path": "keystone_authtoken.j2"
+                                },
+                                {
+                                    "key": "oslomessagingj",
+                                    "path": "oslo_messaging.j2"
+                                }
+                            ],
+                            "name": "exports"
+                        },
+                        "name": "exports"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "nodes-config",
+                                    "path": "nodes-config.json"
+                                }
+                            ],
+                            "name": "nodes-config"
+                        },
+                        "name": "nodes-config"
+                    },
+                    {
+                        "configMap": {
+                            "defaultMode": 420,
+                            "items": [
+                                {
+                                    "key": "service-config",
+                                    "path": "service-config.json"
+                                }
+                            ],
+                            "name": "nova-scheduler-service-config"
+                        },
+                        "name": "service-config"
+                    },
+                    {
+                        "name": "default-token-cghh4",
+                        "secret": {
+                            "defaultMode": 420,
+                            "secretName": "default-token-cghh4"
+                        }
+                    }
+                ]
+            },
+            "status": {
+                "conditions": [
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:11:55Z",
+                        "status": "True",
+                        "type": "Initialized"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:12:17Z",
+                        "status": "True",
+                        "type": "Ready"
+                    },
+                    {
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2017-03-23T16:11:55Z",
+                        "status": "True",
+                        "type": "PodScheduled"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "containerID": "docker://ac095536f4d4bd4ed07b7121d82e185e9800231cd8fc0b359bdeebbaa3c3be35",
+                        "image": "docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-scheduler:latest",
+                        "imageID": "docker-pullable://docker-dev-virtual.docker.mirantis.net/mirantis/ccp/stable/newton/nova-scheduler@sha256:71043a1eee55c5923cd1ee81b1e2d17ee82f3638d5cdc50fd9775f34afeee210",
+                        "lastState": {},
+                        "name": "nova-scheduler",
+                        "ready": true,
+                        "restartCount": 0,
+                        "state": {
+                            "running": {
+                                "startedAt": "2017-03-23T16:12:02Z"
+                            }
+                        }
+                    }
+                ],
+                "hostIP": "192.168.0.162",
+                "phase": "Running",
+                "podIP": "10.101.182.24",
+                "startTime": "2017-03-23T16:11:55Z"
+            }
+        }
+    ],
+    "kind": "PodList",
+    "metadata": {
+        "resourceVersion": "413690",
+        "selfLink": "/api/v1/namespaces/ccp/pods"
+    }
+}
